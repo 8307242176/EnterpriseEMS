@@ -230,3 +230,23 @@ Admin@123
 ## Author
 
 Developed as a full-stack enterprise web application using ASP.NET Core MVC and SQL Server to simulate real-world employee management workflows and organizational operations.
+## 📸 Screenshots
+
+### Login Page
+![Login Page](Screenshot/login.png)
+
+### Admin Dashboard
+![Dashboard](Screenshots/dashboard.png)
+
+### Employee Management
+![Employees](Screenshots/employees.png)
+
+### Leave Management
+![Leave Requests](Screenshots/LeaveRequest.png)
+
+### Home Page
+![Home Page](Screenshot/Home.png)
+
+### Profile Page
+![Profile Page](Screenshot/ProfileSetting.png)
+
