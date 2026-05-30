@@ -1,0 +1,339 @@
+﻿@model EnterpriseEMS.Models.Attendance.Attendance
+
+@{
+    ViewData["Title"] = "Attendance Details";
+}
+
+<div class="container-fluid px-3 px-lg-4 py-4">
+
+    <div class="page-heading">
+
+        <div class="page-heading-copy">
+
+            <span class="page-icon">
+
+                <i class="bi bi-calendar-check"></i>
+
+            </span>
+
+            <div>
+
+                <p class="eyebrow mb-1">
+
+                    Attendance Management
+
+                </p>
+
+                <h1 class="h3 mb-1">
+
+                    Attendance Details
+
+                </h1>
+
+                <p class="text-muted mb-0">
+
+                    View attendance information and employee record
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="heading-actions">
+
+            <a asp-action="Index"
+               class="btn btn-outline-secondary btn-sm">
+
+                Back
+
+            </a>
+
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.Id"
+               class="btn btn-primary btn-sm">
+
+                Edit Record
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <section class="row g-3">
+
+
+        <div class="col-xl-4">
+
+            <div class="panel h-100 text-center profile-card">
+
+
+                <div class="profile-hero">
+
+                    <img class="avatar-img avatar-xl profile-photo"
+                         src="~/images/avatar/avatar.jpg">
+
+
+                    <h2 class="h5 mb-1">
+
+                        @Model.Employee.FullName
+
+                    </h2>
+
+
+                    <p class="text-muted mb-3">
+
+                        @Model.Employee.Email
+
+                    </p>
+
+
+                    @if (Model.Status == "Present")
+                    {
+                        <span class="badge text-bg-success">
+
+                            Present
+
+                        </span>
+                    }
+                    else if (Model.Status == "Absent")
+                    {
+                        <span class="badge text-bg-danger">
+
+                            Absent
+
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-warning">
+
+                            @Model.Status
+
+                        </span>
+                    }
+
+
+                </div>
+
+
+
+                <div class="info-list mt-4 text-start">
+
+
+                    <div>
+
+                        <span>
+
+                            Employee ID
+
+                        </span>
+
+                        <strong>
+
+                            @Model.EmployeeId
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <span>
+
+                            Attendance Date
+
+                        </span>
+
+                        <strong>
+
+                            @Model.Date.ToShortDateString()
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <span>
+
+                            Status
+
+                        </span>
+
+                        <strong>
+
+                            @Model.Status
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+
+        <div class="col-xl-8">
+
+
+            <div class="panel mb-3">
+
+                <div class="panel-header">
+
+                    <h2 class="h5">
+
+                        Attendance Overview
+
+                    </h2>
+
+                </div>
+
+
+                <div class="row g-3">
+
+
+                    <div class="col-md-4">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Check In
+
+                            </span>
+
+                            <strong>
+
+                                @Model.CheckInTime
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-4">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Check Out
+
+                            </span>
+
+                            <strong>
+
+                                @Model.CheckOutTime
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-4">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Working Status
+
+                            </span>
+
+                            <strong>
+
+                                @Model.Status
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="panel">
+
+                <h5>
+
+                    Attendance Summary
+
+                </h5>
+
+
+                <p class="text-muted">
+
+                    Employee:
+
+                    <strong>
+
+                        @Model.Employee.FullName
+
+                    </strong>
+
+                </p>
+
+
+                <p class="text-muted">
+
+                    Date:
+
+                    <strong>
+
+                        @Model.Date.ToLongDateString()
+
+                    </strong>
+
+                </p>
+
+
+                <p class="text-muted">
+
+                    Recorded Status:
+
+                    <strong>
+
+                        @Model.Status
+
+                    </strong>
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+</div>

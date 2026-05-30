@@ -1,0 +1,253 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-4">
+
+    <h2 class="fw-bold mb-4 text-primary">
+        Admin Dashboard
+    </h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Total Employees
+                    </h6>
+
+                    <h1 class="fw-bold text-primary">
+                        @ViewBag.TotalEmployee
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Attendance Records
+                    </h6>
+
+                    <h1 class="fw-bold text-success">
+                        @ViewBag.TotalAttendance
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Leave Requests
+                    </h6>
+
+                    <h1 class="fw-bold text-warning">
+                        @ViewBag.TotalLeave
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Active Employees
+                    </h6>
+
+                    <h1 class="fw-bold text-danger">
+                        @ViewBag.ActiveEmployee
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row mt-5">
+
+        <div class="col-md-8">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body">
+
+                    <h5 class="mb-4">
+                        Company Analytics
+                    </h5>
+
+                    <canvas id="barChart"
+                            height="120">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body">
+
+                    <h5 class="mb-4">
+                        Employee Distribution
+                    </h5>
+
+                    <canvas id="doughnutChart">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const barChart =
+        document.getElementById(
+            'barChart');
+
+    new Chart(barChart, {
+
+        type: 'bar',
+
+        data: {
+
+            labels: [
+                'Employees',
+                'Attendance',
+                'Leaves',
+                'Active'
+            ],
+
+            datasets: [{
+
+                label: 'Company Statistics',
+
+                data: [
+                    @ViewBag.TotalEmployee,
+                    @ViewBag.TotalAttendance,
+                    @ViewBag.TotalLeave,
+                    @ViewBag.ActiveEmployee
+                ],
+
+                backgroundColor: [
+                    '#0d6efd',
+                    '#198754',
+                    '#ffc107',
+                    '#dc3545'
+                ],
+
+                borderRadius: 10
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+                    display: true
+                }
+
+            }
+
+        }
+
+    });
+
+
+
+    const doughnutChart =
+        document.getElementById(
+            'doughnutChart');
+
+    new Chart(doughnutChart, {
+
+        type: 'doughnut',
+
+        data: {
+
+            labels: [
+                'Active',
+                'Inactive'
+            ],
+
+            datasets: [{
+
+                data: [
+
+                    @ViewBag.ActiveEmployee,
+
+                    @ViewBag.TotalEmployee
+                    -
+                    @ViewBag.ActiveEmployee
+
+                ],
+
+                backgroundColor: [
+                    '#198754',
+                    '#dc3545'
+                ]
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true
+
+        }
+
+    });
+
+</script>

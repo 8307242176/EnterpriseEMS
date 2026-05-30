@@ -1,0 +1,256 @@
+﻿@model EnterpriseEMS.Models.Employee.Employee
+
+@{
+    ViewData["Title"] = "Delete Employee";
+}
+
+<div class="container-fluid px-3 px-lg-4 py-4">
+
+    <div class="page-heading">
+
+        <div class="page-heading-copy">
+
+            <span class="page-icon">
+
+                <i class="bi bi-trash"></i>
+
+            </span>
+
+            <div>
+
+                <p class="eyebrow mb-1">
+
+                    Management
+
+                </p>
+
+                <h1 class="h3 mb-1">
+
+                    Delete Employee
+
+                </h1>
+
+                <p class="text-muted mb-0">
+
+                    Confirm employee deletion
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <section class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="panel">
+
+                <div class="text-center mb-4">
+
+                    <div class="mb-3">
+
+                        <i class="bi bi-exclamation-triangle-fill text-danger"
+                           style="font-size:70px;"></i>
+
+                    </div>
+
+                    <h3>
+
+                        Are You Sure?
+
+                    </h3>
+
+                    <p class="text-muted">
+
+                        This employee account will be permanently deleted.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="row g-3">
+
+
+                    <div class="col-md-6">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Employee Code
+
+                            </span>
+
+                            <strong>
+
+                                @Model.EmployeeCode
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Full Name
+
+                            </span>
+
+                            <strong>
+
+                                @Model.FullName
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Email
+
+                            </span>
+
+                            <strong>
+
+                                @Model.Email
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Phone
+
+                            </span>
+
+                            <strong>
+
+                                @Model.Phone
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Department
+
+                            </span>
+
+                            <strong>
+
+                                @Model.Department
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Designation
+
+                            </span>
+
+                            <strong>
+
+                                @Model.Designation
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <form asp-action="Delete"
+                      class="mt-5">
+
+                    <input type="hidden"
+                           asp-for="Id" />
+
+
+                    <div class="d-flex justify-content-center gap-3">
+
+
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary">
+
+                            Cancel
+
+                        </a>
+
+
+                        <button type="submit"
+                                class="btn btn-danger">
+
+                            <i class="bi bi-trash"></i>
+
+                            Delete Employee
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

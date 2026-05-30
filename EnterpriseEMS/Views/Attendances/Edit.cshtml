@@ -1,0 +1,173 @@
+﻿@model EnterpriseEMS.Models.Attendance.Attendance
+
+@{
+    ViewData["Title"] = "Edit Attendance";
+}
+
+<div class="container-fluid px-3 px-lg-4 py-4">
+
+    <div class="page-heading">
+
+        <div class="page-heading-copy">
+
+            <h1 class="h3 mb-1">
+
+                Edit Attendance
+
+            </h1>
+
+            <p class="text-muted">
+
+                Modify attendance record
+
+            </p>
+
+        </div>
+
+
+        <div class="heading-actions">
+
+            <a asp-action="Index"
+               class="btn btn-outline-secondary">
+
+                Back
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <section class="row g-3">
+
+        <div class="col-xl-8">
+
+            <form asp-action="Edit"
+                  method="post"
+                  class="panel">
+
+                <input type="hidden"
+                       asp-for="Id" />
+
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3">
+                </div>
+
+
+
+                <div class="row g-3">
+
+
+                    <div class="col-md-6">
+
+                        <label asp-for="EmployeeId"></label>
+
+                        <select asp-for="EmployeeId"
+                                asp-items="ViewBag.EmployeeId"
+                                class="form-select">
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <label asp-for="Date"></label>
+
+                        <input asp-for="Date"
+                               class="form-control" />
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <label asp-for="CheckInTime"></label>
+
+                        <input asp-for="CheckInTime"
+                               class="form-control" />
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <label asp-for="CheckOutTime"></label>
+
+                        <input asp-for="CheckOutTime"
+                               class="form-control" />
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <label asp-for="Status"></label>
+
+                        <select asp-for="Status"
+                                class="form-select">
+
+                            <option>Present</option>
+
+                            <option>Absent</option>
+
+                            <option>Leave</option>
+
+                            <option>Half Day</option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="d-flex justify-content-end gap-2 mt-4">
+
+
+                    <a asp-action="Index"
+                       class="btn btn-outline-secondary">
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="btn btn-primary">
+
+                        Save Changes
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+@section Scripts {
+
+    @{
+
+        await Html.RenderPartialAsync(
+        "_ValidationScriptsPartial");
+
+    }
+
+}

@@ -1,0 +1,298 @@
+﻿@{
+    ViewData["Title"] = "Employee Dashboard";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-4">
+
+    <h2 class="fw-bold mb-4 text-primary">
+
+        Welcome,
+
+        @User.Identity.Name
+
+    </h2>
+
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+
+                        My Attendance
+
+                    </h6>
+
+                    <h1 class="fw-bold text-success">
+
+                        @ViewBag.MyAttendance
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+
+                        My Leave Requests
+
+                    </h6>
+
+                    <h1 class="fw-bold text-warning">
+
+                        @ViewBag.MyLeaves
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+
+                        Pending Leaves
+
+                    </h6>
+
+                    <h1 class="fw-bold text-danger">
+
+                        @ViewBag.PendingLeaves
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row mt-5">
+
+        <div class="col-md-8">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body">
+
+                    <h5 class="mb-4">
+
+                        My Activity Statistics
+
+                    </h5>
+
+                    <canvas id="lineChart"
+                            height="120">
+
+                    </canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body">
+
+                    <h5 class="mb-4">
+
+                        Leave Distribution
+
+                    </h5>
+
+                    <canvas id="pieChart">
+
+                    </canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row mt-5">
+
+        <div class="col-md-12">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body">
+
+                    <h5 class="mb-3">
+
+                        Quick Actions
+
+                    </h5>
+
+                    <a asp-controller="Attendance"
+                       asp-action="Create"
+                       class="btn btn-success me-2">
+
+                        Mark Attendance
+
+                    </a>
+
+                    <a asp-controller="LeaveRequests"
+                       asp-action="Create"
+                       class="btn btn-primary">
+
+                        Apply Leave
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+const lineChart =
+document.getElementById(
+'lineChart');
+
+new Chart(lineChart, {
+
+type:'line',
+
+data:{
+
+labels:[
+
+'Attendance',
+
+'Leaves',
+
+'Pending'
+
+],
+
+datasets:[{
+
+label:'My Statistics',
+
+data:[
+
+@ViewBag.MyAttendance,
+
+@ViewBag.MyLeaves,
+
+@ViewBag.PendingLeaves
+
+],
+
+borderColor:'#0d6efd',
+
+backgroundColor:
+'rgba(13,110,253,.2)',
+
+fill:true,
+
+tension:.4
+
+}]
+
+},
+
+options:{
+
+responsive:true
+
+}
+
+});
+
+
+
+
+const pieChart =
+document.getElementById(
+'pieChart');
+
+new Chart(pieChart, {
+
+type:'pie',
+
+data:{
+
+labels:[
+
+'Leaves',
+
+'Attendance'
+
+],
+
+datasets:[{
+
+data:[
+
+@ViewBag.MyLeaves,
+
+@ViewBag.MyAttendance
+
+],
+
+backgroundColor:[
+
+'#ffc107',
+
+'#198754'
+
+]
+
+}]
+
+},
+
+options:{
+
+responsive:true
+
+}
+
+});
+
+</script>

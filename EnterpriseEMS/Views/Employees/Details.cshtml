@@ -1,0 +1,306 @@
+﻿@model EnterpriseEMS.Models.Employee.Employee
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<div class="container-fluid px-3 px-lg-4 py-4">
+
+    <div class="page-heading">
+
+        <div class="page-heading-copy">
+
+            <span class="page-icon">
+
+                <i class="bi bi-person-lines-fill"></i>
+
+            </span>
+
+            <div>
+
+                <p class="eyebrow mb-1">
+
+                    Management
+
+                </p>
+
+                <h1 class="h3 mb-1">
+
+                    Employee Details
+
+                </h1>
+
+                <p class="text-muted mb-0">
+
+                    Inspect employee profile and account data
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="heading-actions">
+
+            <a asp-action="Index"
+               class="btn btn-outline-secondary btn-sm">
+
+                Back
+
+            </a>
+
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.Id"
+               class="btn btn-primary btn-sm">
+
+                Edit Employee
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <section class="row g-3">
+
+
+        <div class="col-12 col-xl-4">
+
+            <div class="panel h-100 text-center profile-card">
+
+                <div class="profile-hero">
+
+                    <img class="avatar-img avatar-xl profile-photo"
+                         src="~/images/avatar/avatar.jpg">
+
+
+                    <h2 class="h5 mb-1">
+
+                        @Model.FullName
+
+                    </h2>
+
+
+                    <p class="text-muted mb-3">
+
+                        @Model.Designation
+
+                    </p>
+
+
+                    @if (Model.IsActive)
+                    {
+                        <span class="badge text-bg-success">
+
+                            Active Account
+
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-danger">
+
+                            Inactive
+
+                        </span>
+                    }
+
+                </div>
+
+
+
+                <div class="info-list mt-4 text-start">
+
+                    <div>
+
+                        <span>Email</span>
+
+                        <strong>
+
+                            @Model.Email
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Phone</span>
+
+                        <strong>
+
+                            @Model.Phone
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Department</span>
+
+                        <strong>
+
+                            @Model.Department
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Employee Code</span>
+
+                        <strong>
+
+                            @Model.EmployeeCode
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-12 col-xl-8">
+
+            <div class="panel mb-3">
+
+                <div class="panel-header">
+
+                    <h2 class="h5">
+
+                        Account Overview
+
+                    </h2>
+
+                </div>
+
+
+                <div class="row g-3">
+
+
+                    <div class="col-md-4">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Salary
+
+                            </span>
+
+                            <strong>
+
+                                @Model.Salary
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-4">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Joined
+
+                            </span>
+
+                            <strong>
+
+                                @Model.DateOfJoining.ToShortDateString()
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-4">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Status
+
+                            </span>
+
+                            <strong>
+
+                                @(Model.IsActive ? "Active" : "Inactive")
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div class="panel">
+
+                <h5>
+
+                    Employee Summary
+
+                </h5>
+
+                <p class="text-muted">
+
+                    Designation:
+
+                    <strong>
+
+                        @Model.Designation
+
+                    </strong>
+
+                </p>
+
+
+                <p class="text-muted">
+
+                    Department:
+
+                    <strong>
+
+                        @Model.Department
+
+                    </strong>
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</div>

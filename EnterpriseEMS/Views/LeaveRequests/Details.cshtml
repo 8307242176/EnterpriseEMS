@@ -1,0 +1,269 @@
+﻿@model EnterpriseEMS.Models.Leave.LeaveRequest
+
+
+
+@{
+    ViewData["Title"] = "Leave Details";
+}
+
+<div class="container-fluid px-3 px-lg-4 py-4">
+
+    <div class="page-heading">
+
+        <div class="page-heading-copy">
+
+            <h1 class="h3 mb-1">
+
+                Leave Request Details
+
+            </h1>
+
+            <p class="text-muted">
+
+                Review leave information
+
+            </p>
+
+        </div>
+
+
+        <div class="heading-actions">
+
+
+            <a asp-action="Index"
+               class="btn btn-outline-secondary">
+
+                Back
+
+            </a>
+
+
+            @if (User.IsInRole("Admin")
+                        || User.IsInRole("HR"))
+            {
+
+                @if (Model.Status == "Pending")
+                {
+
+                    <a asp-action="Approve"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-success">
+
+                        Approve
+
+                    </a>
+
+
+                    <a asp-action="Reject"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-warning">
+
+                        Reject
+
+                    </a>
+
+                }
+
+            }
+
+
+        </div>
+
+    </div>
+
+
+
+
+    <section class="row g-3">
+
+
+        <div class="col-xl-4">
+
+            <div class="panel text-center h-100">
+
+
+                <div class="profile-hero">
+
+
+                    <img class="avatar-img avatar-xl profile-photo"
+                         src="~/images/avatar/avatar.jpg">
+
+
+                    <h2 class="h5 mt-3">
+
+                        @Model.EmployeeId
+
+                    </h2>
+
+
+                    <p class="text-muted">
+
+                        @Model.EmployeeId
+
+                    </p>
+
+
+                    @if (Model.Status == "Pending")
+                    {
+                        <span class="badge text-bg-warning">
+
+                            Pending
+
+                        </span>
+                    }
+
+                    else if (Model.Status == "Approved")
+                    {
+                        <span class="badge text-bg-success">
+
+                            Approved
+
+                        </span>
+                    }
+
+                    else
+                    {
+                        <span class="badge text-bg-danger">
+
+                            Rejected
+
+                        </span>
+                    }
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+
+        <div class="col-xl-8">
+
+
+            <div class="panel">
+
+
+                <div class="row g-3">
+
+
+                    <div class="col-md-6">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Start Date
+
+                            </span>
+
+                            <strong>
+
+                                @Model.StartDate.ToShortDateString()
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                End Date
+
+                            </span>
+
+                            <strong>
+
+                                @Model.EndDate.ToShortDateString()
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Duration
+
+                            </span>
+
+                            <strong>
+
+                                @((Model.EndDate - Model.StartDate).Days + 1)
+                                Days
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <div class="mini-card">
+
+                            <span>
+
+                                Status
+
+                            </span>
+
+                            <strong>
+
+                                @Model.Status
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <hr>
+
+
+                <h5>
+
+                    Reason
+
+                </h5>
+
+
+                <p class="text-muted">
+
+                    @Model.Reason
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+</div>

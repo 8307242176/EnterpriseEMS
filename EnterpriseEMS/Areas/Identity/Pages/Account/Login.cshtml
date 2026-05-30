@@ -1,0 +1,149 @@
+﻿@page
+@model LoginModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Login</title>
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/vendors/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="~/css/style.css">
+
+</head>
+
+<body class="auth-body">
+
+
+    <button class="icon-button theme-toggle auth-theme-toggle"
+            type="button"
+            data-theme-toggle>
+
+        <i class="bi bi-moon-stars"></i>
+
+    </button>
+
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+            <div class="mb-4">
+
+                <p class="eyebrow mb-1">
+
+                    Secure Access
+
+                </p>
+
+                <h1 class="h3">
+
+                    Login
+
+                </h1>
+
+                <p class="text-muted">
+
+                    Sign in to workspace
+
+                </p>
+
+            </div>
+
+
+            <form method="post">
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger">
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label asp-for="Input.Email"
+                           class="form-label"></label>
+
+                    <input asp-for="Input.Email"
+                           class="form-control">
+
+                    <span asp-validation-for="Input.Email"
+                          class="text-danger"></span>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label asp-for="Input.Password"
+                           class="form-label"></label>
+
+                    <input asp-for="Input.Password"
+                           class="form-control">
+
+                    <span asp-validation-for="Input.Password"
+                          class="text-danger"></span>
+
+                </div>
+
+
+                <div class="form-check mb-4">
+
+                    <input asp-for="Input.RememberMe"
+                           class="form-check-input">
+
+                    <label asp-for="Input.RememberMe"></label>
+
+                </div>
+
+
+                <button class="btn btn-primary w-100"
+                        type="submit">
+
+                    <i class="bi bi-box-arrow-in-right"></i>
+
+                    Sign In
+
+                </button>
+
+
+            </form>
+
+
+            <div class="auth-footer">
+
+                <a asp-page="./ForgotPassword">
+
+                    Forgot Password?
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/main.js"></script>
+
+    <partial name="_ValidationScriptsPartial" />
+
+</body>
+
+</html>

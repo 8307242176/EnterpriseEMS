@@ -1,0 +1,330 @@
+﻿@model IEnumerable<EnterpriseEMS.Models.Leave.LeaveRequest>
+
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Leave Requests";
+}
+
+<div class="container-fluid px-3 px-lg-4 py-4">
+
+<div class="page-heading">
+
+<div class="page-heading-copy">
+
+<span class="page-icon">
+
+<i class="bi bi-calendar-event"></i>
+
+</span>
+
+<div>
+
+<p class="eyebrow mb-1">
+
+Leave Management
+
+</p>
+
+<h1 class="h3 mb-1">
+
+Leave Requests
+
+</h1>
+
+<p class="text-muted mb-0">
+
+Manage employee leave applications
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="heading-actions">
+
+<a asp-action="Create"
+class="btn btn-primary">
+
+<i class="bi bi-plus-circle"></i>
+
+Create Leave
+
+</a>
+
+</div>
+
+</div>
+
+
+
+
+<section class="row g-3 mb-4">
+
+
+<div class="col-md-4">
+
+<div class="panel">
+
+<p class="text-muted">
+
+Total Requests
+
+</p>
+
+<h3>
+
+@Model.Count()
+
+</h3>
+
+</div>
+
+</div>
+
+
+
+<div class="col-md-4">
+
+<div class="panel">
+
+<p class="text-muted">
+
+Pending
+
+</p>
+
+<h3>
+
+@Model.Count(x=>x.Status=="Pending")
+
+</h3>
+
+</div>
+
+</div>
+
+
+
+<div class="col-md-4">
+
+<div class="panel">
+
+<p class="text-muted">
+
+Approved
+
+</p>
+
+<h3>
+
+@Model.Count(x=>x.Status=="Approved")
+
+</h3>
+
+</div>
+
+</div>
+
+
+</section>
+
+
+
+
+<div class="panel">
+
+<div class="table-responsive">
+
+<table class="table align-middle">
+
+<thead>
+
+<tr>
+
+<th>
+
+Employee
+
+</th>
+
+<th>
+
+From
+
+</th>
+
+<th>
+
+To
+
+</th>
+
+<th>
+
+Reason
+
+</th>
+
+<th>
+
+Status
+
+</th>
+
+<th class="text-end">
+
+Actions
+
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+
+@foreach(var item in Model)
+{
+
+<tr>
+
+
+<td>
+
+@item.EmployeeId
+
+</td>
+
+
+
+<td>
+
+@item.StartDate.ToShortDateString()
+
+</td>
+
+
+
+<td>
+
+@item.EndDate.ToShortDateString()
+
+</td>
+
+
+
+<td>
+
+@item.Reason
+
+</td>
+
+
+
+<td>
+
+@if(item.Status=="Pending")
+{
+<span class="badge text-bg-warning">
+
+Pending
+
+</span>
+}
+
+else if(item.Status=="Approved")
+{
+<span class="badge text-bg-success">
+
+Approved
+
+</span>
+}
+
+else
+{
+<span class="badge text-bg-danger">
+
+Rejected
+
+</span>
+}
+
+</td>
+
+
+
+<td class="text-end">
+
+
+<a asp-action="Details"
+asp-route-id="@item.Id"
+class="btn btn-info btn-sm">
+
+View
+
+</a>
+
+
+<a asp-action="Delete"
+asp-route-id="@item.Id"
+class="btn btn-danger btn-sm">
+
+Delete
+
+</a>
+
+
+@if(User.IsInRole("Admin")
+|| User.IsInRole("HR"))
+{
+
+@if(item.Status=="Pending")
+{
+
+<a asp-action="Approve"
+asp-route-id="@item.Id"
+class="btn btn-success btn-sm">
+
+Approve
+
+</a>
+
+
+<a asp-action="Reject"
+asp-route-id="@item.Id"
+class="btn btn-warning btn-sm">
+
+Reject
+
+</a>
+
+}
+
+}
+
+
+</td>
+
+
+</tr>
+
+}
+
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>

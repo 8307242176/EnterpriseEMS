@@ -1,0 +1,333 @@
+﻿@page
+
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container-fluid px-3 px-lg-4 py-4">
+
+    <div class="page-heading">
+
+        <div class="page-heading-copy">
+
+            <span class="page-icon">
+
+                <i class="bi bi-person-badge"></i>
+
+            </span>
+
+            <div>
+
+                <p class="eyebrow mb-1">
+
+                    Account
+
+                </p>
+
+                <h1 class="h3 mb-1">
+
+                    Profile
+
+                </h1>
+
+                <p class="text-muted mb-0">
+
+                    Manage your personal information and account settings
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <section class="row g-3">
+
+
+        <div class="col-12 col-xl-4">
+
+
+            <div class="panel h-100 text-center profile-card">
+
+
+                <div class="profile-cover">
+
+                    <img src="~/images/png/dasher-ui-bootstrap-5.jpg"
+                         class="img-fluid">
+
+                </div>
+
+
+                <img class="avatar-img avatar-xl profile-photo"
+                     src="~/images/avatar/avatar.jpg">
+
+
+                <h2 class="h5 mt-3 mb-1">
+
+                    @User.Identity?.Name
+
+                </h2>
+
+
+                <p class="text-muted mb-3">
+
+                    @(User.IsInRole("Admin")
+                                        ? "Administrator"
+                                        : "Employee")
+
+                </p>
+
+
+                <div class="d-flex justify-content-center gap-2">
+
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <span class="badge text-bg-primary">
+
+                            Admin
+
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-success">
+
+                            Employee
+
+                        </span>
+                    }
+
+
+                    <span class="badge text-bg-success">
+
+                        Verified
+
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="info-list mt-4 text-start">
+
+
+                    <div>
+
+                        <span>
+
+                            Email
+
+                        </span>
+
+                        <strong>
+
+                            @Model.Username
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <span>
+
+                            Phone
+
+                        </span>
+
+                        <strong>
+
+                            @(String.IsNullOrEmpty(Model.Input.PhoneNumber)
+                                                        ? "Not Added"
+                                                        : Model.Input.PhoneNumber)
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <span>
+
+                            Role
+
+                        </span>
+
+                        <strong>
+
+                            @(User.IsInRole("Admin")
+                                                        ? "Administrator"
+                                                        : "Employee")
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <div class="col-12 col-xl-8">
+
+
+            <form method="post"
+                  class="panel">
+
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger">
+                </div>
+
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="h5 mb-1">
+
+                            Profile Settings
+
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Update your profile information
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="row g-3">
+
+
+                    <div class="col-md-6">
+
+
+                        <label class="form-label">
+
+                            Username
+
+                        </label>
+
+
+                        <input class="form-control"
+                               value="@Model.Username"
+                               readonly>
+
+
+                    </div>
+
+
+
+
+                    <div class="col-md-6">
+
+
+                        <label asp-for="Input.PhoneNumber"
+                               class="form-label">
+
+                            Phone Number
+
+                        </label>
+
+
+                        <input asp-for="Input.PhoneNumber"
+                               class="form-control">
+
+
+                        <span asp-validation-for="Input.PhoneNumber"
+                              class="text-danger">
+
+                        </span>
+
+
+                    </div>
+
+
+
+
+                    <div class="col-12">
+
+
+                        <label class="form-label">
+
+                            Bio
+
+                        </label>
+
+
+<textarea class="form-control"
+          rows="5"
+          readonly>
+
+Enterprise Employee Management System User
+
+</textarea>
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+                <div class="d-flex justify-content-end mt-4">
+
+
+                    <button class="btn btn-primary"
+                            type="submit">
+
+                        <i class="bi bi-check2-circle"></i>
+
+                        Save Profile
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </section>
+
+
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

@@ -1,0 +1,214 @@
+﻿@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication1</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApplication1</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Employees" asp-action="Index">
+                                    Employees
+                                </a>
+                            </li>
+                        }
+                        @if (User.IsInRole("HR") || User.IsInRole("Admin"))
+                        {
+                           
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Attendances" asp-action="Index">
+                                    Attendance
+                                </a>
+                            </li>
+
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="LeaveRequests" asp-action="Index">
+                                Leave Management
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Dashboard" asp-action="Index">
+                                Dashboard
+                            </a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+ *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="adminHMD professional admin dashboard template">
+    <title>Dashboard | adminHMD</title>
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/vendors/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<body>
+    <div class="admin-shell">
+        <div class="sidebar-backdrop" data-sidebar-close></div>
+
+        <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+            <div class="sidebar-header">
+                <a class="brand-mark" asp-area="Identity"
+                   asp-page="/Account/Manage/Index" aria-label="HOME">
+                    <span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
+                    <span class="brand-copy">
+                        <span class="brand-title">adminHMD</span>
+                        <span class="brand-subtitle">Admin Template</span>
+                    </span>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a class="nav-link active" asp-controller="Dashboard" asp-action="Index" aria-current="page">
+                    <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="nav-link" asp-controller="Employees" asp-action="Index">
+                    <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+                    <span class="nav-text">Employee</span>
+                </a>
+                }
+                @if (User.IsInRole("HR") || User.IsInRole("Admin"))
+                {
+                    <a class="nav-link" asp-controller="Attendances" asp-action="Index">
+                    <span class="nav-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
+                    <span class="nav-text">Attendance</span>
+                </a>
+                }
+                <a class="nav-link" asp-controller="LeaveRequests" asp-action="Index">
+                    <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
+                    <span class="nav-text">Leave Request</span>
+                </a>
+              
+                <a class="nav-link" asp-area="Identity"
+                   asp-page="/Account/Manage/Index">
+                    <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+                    <span class="nav-text">Settings</span>
+                </a>
+</nav>
+            
+            <div class="sidebar-user">
+                 <partial name="_LoginPartial" />
+            </div>
+            
+
+            <div class="sidebar-footer">
+                <span class="status-dot"></span>
+                <span class="sidebar-footer-text">System running smoothly</span>
+            </div>
+        </aside>
+
+        <div class="admin-main">
+            <nav class="navbar admin-navbar navbar-expand bg-white">
+                <div class="container-fluid px-3 px-lg-4">
+                    <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar" aria-expanded="true" aria-label="Toggle sidebar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+                        <input class="form-control search-input" type="search" placeholder="Search users, orders, reports" aria-label="Search">
+                    </form>
+
+                    <div class="navbar-actions ms-auto">
+                        <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+                            <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown">
+                            <button class="icon-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+                                <span class="notification-dot"></span>
+                                <i class="bi bi-bell" aria-hidden="true"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end notification-menu">
+                                <div class="dropdown-header fw-bold text-body">Notifications</div>
+                                <a class="dropdown-item" href="users.html">
+                                    <span class="notification-title">New user registered</span>
+                                    <span class="notification-time">4 minutes ago</span>
+                                </a>
+                                <a class="dropdown-item" href="charts.html">
+                                    <span class="notification-title">Revenue target reached</span>
+                                    <span class="notification-time">32 minutes ago</span>
+                                </a>
+                                <a class="dropdown-item" href="settings.html">
+                                    <span class="notification-title">Security review completed</span>
+                                    <span class="notification-time">1 hour ago</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ms-3">
+
+                            <partial name="_LoginPartial" />
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+          @RenderBody()
+
+            <footer class="admin-footer">
+                <div class="container-fluid px-3 px-lg-4">
+                    <span>Copyright 2026 EMS. <br> Developed by <a target="_blank" class="fw-bold text-success" href="#">Ishpreet Singh</a> • Distributed by <a target="_blank" class="fw-bold text-success" href="#"></a> </span>
+                    <span>Ishpreet Singh</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
